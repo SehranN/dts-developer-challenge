@@ -44,10 +44,11 @@ jobs:
         docker build -t dtsazurecr.azurecr.io/frontend:latest ./frontend/task-managment
         docker push dtsazurecr.azurecr.io/frontend:latest
 
-    - name: Set up JDK 17
+    - name: Set up Java
       uses: actions/setup-java@v2
       with:
-        java-version: '17'
+        distribution: 'temurin'   # or 'zulu' or others
+        java-version: '17'  
     
     - name: Build backend JAR
       run: |
