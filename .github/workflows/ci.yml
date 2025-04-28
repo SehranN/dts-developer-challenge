@@ -23,27 +23,7 @@ jobs:
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }} 
-        password: ${{ secrets.DOCKER_PASSWORD }} 
-
-    - name: Build and push frontend Docker image
-      run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:1.0 ./frontend
-        docker push ${{ secrets.DOCKER_USERNAME }}/frontend:1.0
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-    
-    - name: Build backend JAR
-      run: |
-        cd backend
-        ./mvnw clean package -DskipTests
-    
-    - name: Build and push backend Docker image
-      run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:1.0 ./backend
-        docker push ${{ secrets.DOCKER_USERNAME }}/backend:1.0
+        password: ${{ secrets.DOCKER_PASSWORD }}
         
     - name: Install Azure CLI manually
       run: |
@@ -56,11 +36,26 @@ jobs:
     - name: Log in to Azure
       run: |
         az login --service-principal --username ${{ secrets.AZURE_APP_ID }} --password ${{ secrets.AZURE_APP_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        
-    - name: Deploy Docker containers to Azure
-      run: |
-        # for azure
+    - name: Docker Login to ACR
+      run: az acr login --name dtsazurecr
 
-    - name: Deploy with Kubernetes (if applicable)
+    - name: Build and Push Frontend Image
       run: |
-        # for kubectl
+        docker build -t dtsazurecr.azurecr.io/frontend:latest ./frontend
+        docker push dtsazurecr.azurecr.io/frontend:latest
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+    
+    - name: Build backend JAR
+      run: |
+        cd backend
+        ./mvnw clean package -DskipTests
+    
+    - name: Build and Push Backend Image
+      run: |
+        docker build -t dtsazurecr.azurecr.io/backend:latest ./backend
+        docker push dtsazurecr.azurecr.io/backend:latest
+
