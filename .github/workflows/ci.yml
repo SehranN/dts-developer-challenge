@@ -41,7 +41,7 @@ jobs:
 
     - name: Build and Push Frontend Image
       run: |
-        docker build -t dtsazurecr.azurecr.io/frontend:latest ./frontend
+        docker build -t dtsazurecr.azurecr.io/frontend:latest ./frontend/task-managment
         docker push dtsazurecr.azurecr.io/frontend:latest
 
     - name: Set up JDK 17
@@ -56,6 +56,6 @@ jobs:
     
     - name: Build and Push Backend Image
       run: |
-        docker build -t dtsazurecr.azurecr.io/backend:latest ./backend
+        docker build -t dtsazurecr.azurecr.io/backend:latest ./jds
         docker push dtsazurecr.azurecr.io/backend:latest
 
