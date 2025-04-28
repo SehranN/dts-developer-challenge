@@ -27,13 +27,11 @@ jobs:
 
     - name: Build and push frontend Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend ./frontend/task-managment
-        docker push ${{ secrets.DOCKER_USERNAME }}/frontend
+        docker pull ${{ secrets.DOCKER_USERNAME }}/frontend
 
     - name: Build and push backend Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/backend ./jds
-        docker push ${{ secrets.DOCKER_USERNAME }}/backend
+        docker pull ${{ secrets.DOCKER_USERNAME }}/backend
         
     - name: Install Azure CLI manually
       run: |
