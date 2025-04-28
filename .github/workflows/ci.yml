@@ -31,7 +31,7 @@ jobs:
 
     - name: Build and push backend Docker image
       run: |
-        docker pull ${{ secrets.DOCKER_USERNAME }}/backend
+        docker pull ${{ secrets.DOCKER_USERNAME }}/backend:1.0
         
     - name: Install Azure CLI manually
       run: |
