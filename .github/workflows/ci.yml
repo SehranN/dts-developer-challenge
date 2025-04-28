@@ -36,7 +36,7 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/backend
 
     - name: Set up Azure CLI
-      uses: azure/setup-azure-cli@v1
+      uses: azure/setup-azure-cli@v2
 
     - name: Log in to Azure
       run: |
