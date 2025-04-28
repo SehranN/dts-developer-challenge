@@ -1,0 +1,27 @@
+# Ignore environment files
+.env
+.env.*
+
+# Ignore Docker files and build artifacts
+docker-compose.override.yml
+docker-compose.yml
+Dockerfile
+
+# Node modules (for frontend)
+frontend/task-managment/node_modules/
+frontend/task-managment/build/
+frontend/task-managment/Dockerfile
+
+# Maven/Gradle (for backend Java)
+jds/target/
+jds/.mvn/
+jds/.gradle/
+jds/Dockerfile
+
+# IDE/editor files (for all dev environments)
+.idea/
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
